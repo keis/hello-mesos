@@ -50,11 +50,18 @@ class HelloWorldScheduler(Scheduler):
             driver.launchTasks([offer.id.value], tasks)
 
 
-framework = mesos_pb2.FrameworkInfo()
-framework.user = ''
-framework.name = 'zoidberg'
+if __name__ == '__main__':
+    import socket
+    hostname, aliases, ips = socket.gethostbyaddr('mesos')
 
-driver = SchedulerDriver(HelloWorldScheduler(),
-                         framework,
-                         'mesos:5050')
-driver.run()
+    # give system a while to get online
+    time.sleep(10)
+
+    framework = mesos_pb2.FrameworkInfo()
+    framework.user = ''
+    framework.name = 'zoidberg'
+
+    driver = SchedulerDriver(HelloWorldScheduler(),
+                             framework,
+                             '%s:5050' % (ips[0],))
+    driver.run()
