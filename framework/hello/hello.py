@@ -10,7 +10,7 @@ import logging
 import uuid
 import time
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 def new_task(offer):
     task = mesos_pb2.TaskInfo()
@@ -58,7 +58,7 @@ if __name__ == '__main__':
     time.sleep(10)
 
     framework = mesos_pb2.FrameworkInfo()
-    framework.user = ''
+    framework.user = 'root'
     framework.name = 'zoidberg'
 
     driver = SchedulerDriver(HelloWorldScheduler(),
