@@ -1,4 +1,4 @@
-master:
+master01:
   image: mesoscloud/mesos-master:0.23.0-centos-7
   links:
     - zookeeper:zookeeper
@@ -6,9 +6,49 @@ master:
     - 5050
   environment:
     MESOS_ZK: zk://zookeeper:2181/mesos
-    MESOS_QUORUM: 1
+    MESOS_QUORUM: 2
 
-slave:
+master02:
+  image: mesoscloud/mesos-master:0.23.0-centos-7
+  links:
+    - zookeeper:zookeeper
+  expose:
+    - 5050
+  environment:
+    MESOS_ZK: zk://zookeeper:2181/mesos
+    MESOS_QUORUM: 2
+
+master03:
+  image: mesoscloud/mesos-master:0.23.0-centos-7
+  links:
+    - zookeeper:zookeeper
+  expose:
+    - 5050
+  environment:
+    MESOS_ZK: zk://zookeeper:2181/mesos
+    MESOS_QUORUM: 2
+
+slave01:
+  image: mesoscloud/mesos-slave:0.23.0-centos-7
+  links:
+    - zookeeper:zookeeper
+  environment:
+    MESOS_MASTER: zk://zookeeper:2181/mesos
+  volumes:
+    - /sys/fs/cgroup:/sys/fs/cgroup
+    - /var/run/docker.sock:/var/run/docker.sock
+
+slave02:
+  image: mesoscloud/mesos-slave:0.23.0-centos-7
+  links:
+    - zookeeper:zookeeper
+  environment:
+    MESOS_MASTER: zk://zookeeper:2181/mesos
+  volumes:
+    - /sys/fs/cgroup:/sys/fs/cgroup
+    - /var/run/docker.sock:/var/run/docker.sock
+
+slave03:
   image: mesoscloud/mesos-slave:0.23.0-centos-7
   links:
     - zookeeper:zookeeper
@@ -26,4 +66,4 @@ zookeeper:
 framework:
   build: framework
   links:
-    - master:mesos
+    - master01:mesos
