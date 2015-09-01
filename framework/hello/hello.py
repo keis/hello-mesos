@@ -51,11 +51,8 @@ class HelloWorldScheduler(Scheduler):
 
 
 if __name__ == '__main__':
-    import socket
-    hostname, aliases, ips = socket.gethostbyaddr('mesos')
-
     # give system a while to get online
-    time.sleep(10)
+    time.sleep(20)
 
     framework = mesos_pb2.FrameworkInfo()
     framework.user = 'root'
@@ -63,5 +60,5 @@ if __name__ == '__main__':
 
     driver = SchedulerDriver(HelloWorldScheduler(),
                              framework,
-                             '%s:5050' % (ips[0],))
+                             'zk://zookeeper:2181/mesos')
     driver.run()

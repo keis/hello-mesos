@@ -1,2 +1,4 @@
-pesos==0.2.2
+git+git://github.com/keis/pesos@bad-type-crash
 compactor==0.3.0
+kazoo==2.2.1
+twitter.common.zookeeper==0.3.3

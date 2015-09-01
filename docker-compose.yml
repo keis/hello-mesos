@@ -6,7 +6,7 @@ master01:
     - 5050
   environment:
     MESOS_ZK: zk://zookeeper:2181/mesos
-    MESOS_QUORUM: 2
+    MESOS_QUORUM: 1
 
 master02:
   image: mesoscloud/mesos-master:0.23.0-centos-7
@@ -16,7 +16,7 @@ master02:
     - 5050
   environment:
     MESOS_ZK: zk://zookeeper:2181/mesos
-    MESOS_QUORUM: 2
+    MESOS_QUORUM: 1
 
 master03:
   image: mesoscloud/mesos-master:0.23.0-centos-7
@@ -26,7 +26,7 @@ master03:
     - 5050
   environment:
     MESOS_ZK: zk://zookeeper:2181/mesos
-    MESOS_QUORUM: 2
+    MESOS_QUORUM: 1
 
 slave01:
   image: mesoscloud/mesos-slave:0.23.0-centos-7
@@ -66,4 +66,5 @@ zookeeper:
 framework:
   build: framework
   links:
+    - zookeeper
     - master01:mesos
