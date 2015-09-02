@@ -51,9 +51,6 @@ class HelloWorldScheduler(Scheduler):
 
 
 if __name__ == '__main__':
-    # give system a while to get online
-    time.sleep(20)
-
     framework = mesos_pb2.FrameworkInfo()
     framework.user = 'root'
     framework.name = 'zoidberg'

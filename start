@@ -1,0 +1,4 @@
+#!/bin/bash -e
+
+docker-compose scale zookeeper=1
+docker-compose scale master=3 slave=4
