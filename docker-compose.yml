@@ -1,5 +1,5 @@
 master:
-  image: mesoscloud/mesos-master:0.23.0-centos-7
+  image: mesoscloud/mesos-master:0.24.1-centos-7
   links:
     - zookeeper:zookeeper
   expose:
@@ -9,7 +9,7 @@ master:
     MESOS_QUORUM: 1
 
 slave:
-  image: mesoscloud/mesos-slave:0.23.0-centos-7
+  image: mesoscloud/mesos-slave:0.24.1-centos-7
   links:
     - zookeeper:zookeeper
   environment:
